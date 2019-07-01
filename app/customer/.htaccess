@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^customer_record?$ index.php
+
+
+RewriteRule ^view-([0-9]+) view.php?id=$1
+
+RewriteRule ^edit-([0-9]+) edit.php?id=$1
+
+RewriteRule ^delete-([0-9]+) delete.php?id=$1

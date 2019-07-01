@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteRule ^admin_view?$ index.php
+
+RewriteRule ^login?$ login.php
+
+RewriteRule ^logout?$ logout.php
