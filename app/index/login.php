@@ -47,6 +47,7 @@
             if ($row>0) {
               session_start();
               $_SESSION["user_name"]=$fetch["id"];
+              $_SESSION["welcome"]='Welcome <b>'.$fetch["username"].' </b>to the admin Panel';
               echo "<script type='text/javascript'>window.location='../index/admin_view'</script>";
             }
             else{

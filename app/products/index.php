@@ -4,10 +4,10 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Manage Customer</h1>
+      <h1>Manage Products</h1>
       <ol class="breadcrumb">
         <li><a href="../index/admin_view"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Customer Record</li>
+        <li class="active">Products</li>
       </ol>
     </section>
 
@@ -21,7 +21,7 @@
 
           <div class="box">
             <div class="box-header">
-              <button class="btn btn-success" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-customer" title="Add new User" onclick="abc()"><i class="fa fa-plus"></i></button>
+              <button class="btn btn-success" type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-products" title="Add new Product"><i class="fa fa-plus"></i></button>
               <br>
               <?php session_message(); ?>
               <?php error_message(); ?>
@@ -32,29 +32,26 @@
                 <thead>
                 <tr>
                   <th>Sr No #</th>
-                  <th>Customer Name</th>
-                  <th>Father Name</th>
-                  <th>Address</th>
-                  <th>CNIC</th>
+                  <th>Product Name</th>
+                  <th>Manufacturer</th>
                   <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $query_show = "SELECT * FROM customers ";
+                $query_show = "SELECT * FROM products";
                 $i=1;
                 $result     = mysqli_query($con,$query_show);
                 while ($row = mysqli_fetch_array($result)) { ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php  echo $row['name'] ;?></td>
-                    <td><?php  echo $row['father_name'] ;?></td>
-                    <td><?php  echo $row['address'] ;?></td>
-                    <td> <?php  echo $row['cnic'] ;?></td>
+                    <td><?php  echo $row['product_name'] ;?></td>
+                    <td><?php  echo $row['manufacturer'] ;?></td>
+                   
                      <td>
-                    <a href="view-<?php echo $row['id']; ?>" title="View"><i class="fa fa-eye" style="color:orange;font-size: 15px;margin:5px;"></i></a>
-                    <a href="edit-<?php echo $row['id']; ?>" title="Edit"><i class="fa fa-pencil" style="color:skyblue;font-size: 15px;margin:5px;"></i></a>
-                    <a href="delete-<?php echo $row['id']; ?>" title="Delete" onclick="return confirm('Are you sure ??')"><i class="fa fa-trash" style="color:red;font-size: 15px;margin:5px;"></i></a>
+                    <!-- <a href="view_-<?php echo $row['id']; ?>" title="View"><i class="fa fa-eye" style="color:orange;font-size: 15px;margin:5px;"></i></a> -->
+                    <a href="edit_product-<?php echo $row['id']; ?>" title="Edit"><i class="fa fa-pencil" style="color:skyblue;font-size: 15px;margin:5px;"></i></a>
+                    <a href="delete_product-<?php echo $row['id']; ?>" title="Delete" onclick="return confirm('Are you sure ??')"><i class="fa fa-trash" style="color:red;font-size: 15px;margin:5px;"></i></a>
                   </td>
                   </tr>
                   <?php
@@ -92,29 +89,24 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<div class="modal fade" id="modal-customer">
+<div class="modal fade" id="modal-products">
     <div class="modal-dialog model-xs">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Add New Customer</h4>
+          <h4 class="modal-title">Add New Distributer</h4>
         </div>
         <div class="modal-body" >
           <form  method="post" enctype="multipart/form-data" class="form-horizontal">
             <div class="row">
               <div class="col-md-1"></div>
               <div class="col-md-10">
-                <label> Customer Name</label>
-                <input type="text" class="form-control" name="name" placeholder="User Name" required="" id="c_name" autofocus="">
-                <label>Father Name </label>
-                <input type="text" placeholder="Father Name" class="form-control" name="father_name" required="" id="f_name">
-                <label>Phone No</label>
-                <input type="text" placeholder="Phone No" class="form-control" name="phone_no" required="" data-inputmask='"mask": "+99(999)-9999999"' data-mask placeholder="Customer Phone No" id="phone_no">
-                <label>CNIC</label>
-                <input type="text" class="form-control" name="cnic" required="" data-inputmask='"mask": "99999-9999999-9"' data-mask placeholder="CNIC" id="cnic">
-                <label>Address</label>
-                <textarea class="form-control" name="address" placeholder="Address" required="" rows="3" id="address"></textarea>
+                <label> Product Name</label>
+                <input type="text" class="form-control" name="product_name" placeholder="Product Name" required="">
+                <label>Manufecturer </label>
+                <input type="text" placeholder="Manufecturer" class="form-control" name="manufacturer" required="">
+                
                 <div class="row">
                   <br>
                   <div class="col-md-3"></div>
@@ -137,30 +129,17 @@
    <?php
     if(isset($_POST["submit"]))
     {
-      $name = $_POST["name"];
-      $father_name = $_POST["father_name"];
-      $phone_no    = $_POST["phone_no"];
-      $address  = $_POST["address"];
-      $cnic=$_POST["cnic"];
-      $created_at=date("y-m-d h:i:s");
-      $query_insert = "INSERT INTO customers(name, father_name,phone_no,address,cnic,created_by,created_at) VALUES ('$name','$father_name','$phone_no','$address','$cnic','$user','$created_at')";
+      $product_name = $_POST["product_name"];
+      
+      $manufacturer    = $_POST["manufacturer"];
+      
+      $query_insert = "INSERT INTO products (product_name,manufacturer) VALUES ('$product_name','$manufacturer')";
       $result   = mysqli_query($con,$query_insert);
       if($result)
         {
-          $_SESSION["message"]="The Customer is inserted";
-          echo "<script type='text/javascript'>window.location='customer_record'</script>";
+          $_SESSION["message"]="The Distributer is inserted";
+          echo "<script type='text/javascript'>window.location='product_record'</script>";
         } 
       }
   ?>
-  <script>
-   function abc(){
-      var i="";
-      $("#c_name").val(i);
-      $("#f_name").val(i);
-      $("#phone_no").val(i);
-      $("#address").val(i);
-      $("#cnic").val(i);
-
-   }
-  </script>
 

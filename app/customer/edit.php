@@ -15,7 +15,7 @@
       <h1>Edit Profile</h1>
       <ol class="breadcrumb">
         <li><a href="../index/admin_view"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="admin_record"><i class="fa fa-user"></i> Customer Record</a></li>
+        <li><a href="customer_record"><i class="fa fa-user"></i> Customer Record</a></li>
         <li class="active">Edit User Profile</li>
       </ol>
     </section>
@@ -73,6 +73,7 @@
         <div class="row">
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" name="submit"><i class="fa fa-edit"></i> Update</button>
+            <a href="customer_record" title="" class="btn btn-danger"> <i class="fa fa-times" ></i> Cancel</a>
           </div>
         </div>
       </div>

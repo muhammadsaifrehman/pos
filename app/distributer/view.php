@@ -7,7 +7,7 @@
       <h1>Customer Profile</h1>
       <ol class="breadcrumb">
         <li><a href="../index/admin_view"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="customer_record"><i class="fa fa-user"></i> Customer Record</a></li>
+        <li><a href="distributer_record"><i class="fa fa-user"></i> Distributer Record</a></li>
         <li class="active">User Profile</li>
       </ol>
     </section>
@@ -57,7 +57,7 @@
                 </li>
               </ul>
 
-              <a href="customer_record" class="btn btn-default "><i class="fa fa-backward"></i> <b>Back</b></a>
+              <a href="distributer_record" class="btn btn-default "><i class="fa fa-backward"></i> <b>Back</b></a>
               <a href="edit-<?php echo $id?>" class="btn btn-primary pull-right"><i class="fa fa-pencil"></i> <b>Edit</b></a>
             </div>
             <!-- /.box-body -->

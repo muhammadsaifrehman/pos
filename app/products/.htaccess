@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteRule ^product_record?$ index.php
+
+
+RewriteRule ^view_product-([0-9]+) view_product.php?id=$1
+
+RewriteRule ^edit_product-([0-9]+) edit_product.php?id=$1
+
+RewriteRule ^delete_product-([0-9]+) delete_product.php?id=$1

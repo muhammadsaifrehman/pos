@@ -11,6 +11,11 @@
 
     <!-- Main content -->
    <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <?php welcome_message(); ?>
+      </div>
+    </div>
      <div class="row">
        <div class="col-md-4">
          

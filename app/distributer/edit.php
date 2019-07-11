@@ -73,6 +73,7 @@
         <div class="row">
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary" name="submit"><i class="fa fa-edit"></i> Update</button>
+            <a href="distributer_record" title="" class="btn btn-danger"> <i class="fa fa-times" ></i> Cancel</a>
           </div>
         </div>
       </div>
