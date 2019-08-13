@@ -143,12 +143,12 @@
       $address  = $_POST["address"];
       $cnic=$_POST["cnic"];
       $created_at=date("y-m-d h:i:s");
-      $query_insert = "INSERT INTO Distributers(name, father_name,phone_no,address,cnic,created_by,created_at) VALUES ('$name','$father_name','$phone_no','$address','$cnic','$user','$created_at')";
+      $query_insert = "INSERT INTO distributer(name, father_name,phone_no,address,cnic,created_by,created_at) VALUES ('$name','$father_name','$phone_no','$address','$cnic','$user','$created_at')";
       $result   = mysqli_query($con,$query_insert);
       if($result)
         {
           $_SESSION["message"]="The Distributer is inserted";
-          echo "<script type='text/javascript'>window.location='Distributer_record'</script>";
+          echo "<script type='text/javascript'>window.location='distributer_record'</script>";
         } 
       }
   ?>
