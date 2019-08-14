@@ -190,7 +190,7 @@ $id=$_GET["id"];
                   <label> Expiry Start Date <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="date" name="expiry_starting_date"  class="form-control" id="start_date">
+                  <input type="date" name="expiry_start_date"  class="form-control" id="expiry_start_date">
                 </div>
               </div>
               <div class="row mag">
@@ -199,7 +199,7 @@ $id=$_GET["id"];
                   <label> Expiry End Date <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="date" name="" class="form-control" id="expiry_ending_date">
+                  <input type="date" name="" class="form-control" id="expiry_end_date">
                 </div>
               </div>
               
@@ -221,7 +221,7 @@ $id=$_GET["id"];
                 <div class="col-md-8">
                   <input type="radio" id="percentage" checked="" name="discount"> Percentage
                   <input type="radio" id="amount" name="discount"> Amount
-                  <input type="text" id="discount" class="form-control" id="end_date" value="0">
+                  <input type="text" id="discount" class="form-control"  value="0">
                 </div>
               </div>
               
@@ -264,7 +264,7 @@ $id=$_GET["id"];
                   <label> Barcode No: <span><b style="color:red;margin-top: 40px;font-size: 18px">*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" id="sale_price" class="form-control" >
+                  <input type="text" id="imei" class="form-control" onchange="imeiFunction()">
                 </div>
               </div>  
                 <div class=" row mag">
@@ -316,8 +316,10 @@ $id=$_GET["id"];
       document.getElementById(value).style.display = "block";
       evt.currentTarget.className += " active";
       }
-      $("#mydata").hide();
-      $("#table_heading").click(function(){
+     
+       $("#mydata").hide();
+    
+      $("#imei").change(function(){
         $("#mydata").show();
       });
 
@@ -329,6 +331,7 @@ $id=$_GET["id"];
       //product_per_invoice code
       //Arrays are declare
       let productIdArr = new Array();
+      let productNameArr = new Array();
       let expStartingArr = new Array();
       let expEndingArr = new Array();
       let originalPriceArr = new Array();
@@ -338,6 +341,11 @@ $id=$_GET["id"];
       let statusArr = new Array();
       let imeiArr = new Array();
       
+      //this method print the table heading
+     
+      $("#table_heading").click(function(){
+        $("#mydata").show();
+      });
         let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice,status, imei, discountReceived=0;
         
       
@@ -376,30 +384,36 @@ $id=$_GET["id"];
       function imeiFunction()
       {  
           val = getImeiValue();
-          imeiArr.push(val);  
+          imeiArr.push(imei);  
           document.getElementById("imei").value = ""; 
       }
       function insert()
       {
-        //get the value from the "form" through specific id that are define in form fields then store in variable
-        productId        = document.getElementById("product_name").value;
-        expStarting      = document.getElementById("expiry_starting_date").value;
-        expEnding        = document.getElementById("expiry_ending_date").value;
-        //purchasePrice    = document.getElementById("purchase_price").value;
-        salePrice        = document.getElementById("sale_price").value;
-        status        = document.getElementById("status").value;
-      
-        // push is the method of array in javascript ,..and this method push the new value in array 
-          productIdArr.push(productId);
-          expStartingArr.push(expStarting);
-          expEndingArr.push(expEnding);
-          originalPriceArr.push(originalPrice);
-          discountArr.push(discountReceived);
-          purchasePriceArr.push(purchasePrice); 
-          salePriceArr.push(salePrice);
-          statusArr.push(status);
+        var product_name = $('#product_name').val();
+        var exp_start_date = $('#expiry_start_date').val();
+        var exp_end_date = $('#expiry_end_date').val();
+        var original_price = $('#original_price').val();
+        var discount = $('#discount').val();
+        var purchase_price = $('#purchase_price').val();
+        var sale_price = $('#sale_price').val();
+        var status = $('#status').val();
+        var imei = $('#imei').val();  
+        //alert(product_name+' '+exp_start_date+' '+exp_end_date+' '+original_price+''+discount+''+purchase_price+''+sale_price+''+status+''+imei);
+        // Pushing the data in th array 
+        productIdArr.push(product_name);
+      // let productNameArr = new Array();
+        expStartingArr.push(exp_start_date);
+        expEndingArr.push(exp_end_date);
+        originalPriceArr.push(original_price);
+        discountArr.push(discount);
+        purchasePriceArr.push(purchase_price);
+        salePriceArr.push(sale_price);
+        statusArr.push(status);
+        imeiArr.push(imei);
           
-        let table = document.getElementById("myTableData");
+      // Show the inserted data in the table
+           
+           let table = document.getElementById("myTableData");
           
           //count the table row
           let rowCount = table.rows.length;
@@ -409,17 +423,16 @@ $id=$_GET["id"];
           
           //insert the coulmn against the row
           row.insertCell(0).innerHTML= rowCount;
-          row.insertCell(1).innerHTML= productId;
-          row.insertCell(2).innerHTML= expStarting;
-          row.insertCell(3).innerHTML= expEnding;
-          row.insertCell(4).innerHTML= originalPrice;
-          row.insertCell(5).innerHTML= discountReceived;
-          row.insertCell(6).innerHTML= purchasePrice;  
-          row.insertCell(7).innerHTML= salePrice;  
+          row.insertCell(1).innerHTML= product_name;
+          row.insertCell(2).innerHTML= exp_start_date;
+          row.insertCell(3).innerHTML= exp_end_date;
+          row.insertCell(4).innerHTML= original_price;
+          row.insertCell(5).innerHTML= discount;
+          row.insertCell(6).innerHTML= purchase_price;  
+          row.insertCell(7).innerHTML= sale_price;  
           row.insertCell(8).innerHTML= status;   
-          row.insertCell(9).innerHTML= val;
-      val = null; 
-             
+          row.insertCell(9).innerHTML= imei;
+          $("#imei").val('');
       }
       
       let product,expS, expE,originalP,discountP, pPrice, sPrice,imeiNo,productStatus;
