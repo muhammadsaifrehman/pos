@@ -82,8 +82,7 @@ $id=$_GET["id"];
             <div class="box-header">
               <button class="btn btn-success" type="button" class="btn btn-default" data-toggle="modal" data-target="#invoice-product" title="Add new invoice"><i class="fa fa-plus"></i> Add Product</button>
               
-              <?php session_message(); ?>
-              <?php error_message(); ?>
+              
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -140,6 +139,119 @@ $id=$_GET["id"];
           </div>
           <!-- /.box -->
         </div>
+        <div id="accounts_detail" class="tabcontent">
+          <div class="box">
+            <div class="box-header">
+              <h3>Account Details</h3>
+            </div>
+            
+            <div class="box-body">
+              <form  method="post">
+                <div class="row mag">
+                  <?php 
+                  $discount=0;
+                  $original_price=0;
+                  $sql_fetch=mysqli_query($con,"SELECT original_price,discount_per_item FROM products_per_purchase_invoice where purchase_invoice_id= $id");
+                  while($row=mysqli_fetch_assoc($sql_fetch)) {
+                    $original_price=$original_price+$row["original_price"];
+                    $discount=$discount+$row["discount_per_item"];
+                  }
+                  // echo $original_price;
+                  //echo $discount;
+                  ?>
+                  
+                    <div class="col-md-3"> 
+                      <label>Total Amount of the products<span style="color: red;margin-left: 5px;font-size: 18px"><b>*</b></span></label>
+  
+                    </div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" name="" value="<?php echo $original_price; ?>" placeholder="" readonly="">
+                      </div>
+                    </div> 
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Discount Per Product</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="<?php echo $discount;?>" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>  
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div><div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Total Amount of the products</label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="" value="" placeholder="">
+                        </div>
+                    </div>
+
+                  </form>  
+            </div>
+          </div>
+        </div>
         <!-- /.col -->
               </div>
         </div>
@@ -175,6 +287,7 @@ $id=$_GET["id"];
               </div>
               <div class="col-md-8">
                 <select class="form-control" name="product_name" placeholder="Product Name" required="" id="product_name">
+                  <option value="">--Select the Product--</option>
                   <?php 
                   $result     = mysqli_query($con,"SELECT * FROM products");
                   while ($row = mysqli_fetch_array($result)) { ?>
@@ -183,7 +296,7 @@ $id=$_GET["id"];
                 </select>
               </div>
               </div>
-              
+              <input type="hidden" id="fetch_product_name">
               <div class="row mag">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
@@ -209,7 +322,7 @@ $id=$_GET["id"];
                   <label> Original Price <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" name=""   class="form-control" id="original_price">
+                  <input type="text" name=""   class="form-control" id="original_price" placeholder="Original Price of the product" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
               
@@ -241,7 +354,7 @@ $id=$_GET["id"];
                   <label> Sale Price <span><b style="color:red;margin-top: 40px;font-size: 18px">*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" id="sale_price" class="form-control" onfocus="getProductsPerPurchasePrice();readOnlyPurchasePrice()">
+                  <input type="text" id="sale_price" class="form-control" onfocus="getProductsPerPurchasePrice();readOnlyPurchasePrice()"placeholder="Sale Price of the product" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>
               
@@ -261,10 +374,10 @@ $id=$_GET["id"];
               <div class=" row mag">
                 <div class="col-md-1"></div>
                 <div class="col-md-2">
-                  <label> Barcode No: <span><b style="color:red;margin-top: 40px;font-size: 18px">*</b></span></label>
+                  <label> IMEI NO: <span><b style="color:red;margin-top: 40px;font-size: 18px">*</b></span></label>
                 </div>
                 <div class="col-md-8">
-                  <input type="text" id="imei" class="form-control" onchange="imeiFunction()">
+                  <input type="text" id="imei" class="form-control" placeholder="IMEI No" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57">
                 </div>
               </div>  
                 <div class=" row mag">
@@ -272,7 +385,7 @@ $id=$_GET["id"];
                   <div class="col-md-3"></div>
                   <div class="col-md-6 form-group">
                     <button  id="table_heading" class="btn btn-success btn-md" onclick="insert();" type="button"> Display </button>
-              <input type="button" name="submit" class="btn btn-success btn-md" id="submit"  value="Submit" onclick="objVariables();"/>
+              <input type="submit" name="submit" class="btn btn-success btn-md" id="submit"  value="Submit"  disabled="" />
                 </div>
               
           </form>
@@ -342,10 +455,7 @@ $id=$_GET["id"];
       let imeiArr = new Array();
       
       //this method print the table heading
-     
-      $("#table_heading").click(function(){
-        $("#mydata").show();
-      });
+    
         let productName, expStarting, expEnding,originalPrice,discount, purchasePrice, salePrice,status, imei, discountReceived=0;
         
       
@@ -384,7 +494,7 @@ $id=$_GET["id"];
       function imeiFunction()
       {  
           val = getImeiValue();
-          imeiArr.push(imei);  
+          imeiArr.push(val);  
           document.getElementById("imei").value = ""; 
       }
       function insert()
@@ -397,22 +507,44 @@ $id=$_GET["id"];
         var purchase_price = $('#purchase_price').val();
         var sale_price = $('#sale_price').val();
         var status = $('#status').val();
-        var imei = $('#imei').val();  
+        var imei = $('#imei').val();
+        var  fetch_product_name= $('#fetch_product_name').val();  
         //alert(product_name+' '+exp_start_date+' '+exp_end_date+' '+original_price+''+discount+''+purchase_price+''+sale_price+''+status+''+imei);
         // Pushing the data in th array 
-        productIdArr.push(product_name);
+        if (product_name==null || product_name=='') {
+          alert("Please Select the product");
+        }
+        else if (exp_start_date==null || exp_start_date=='') {
+          alert("The Expiry Starting Date is required");
+        }
+        else if (exp_end_date==null || exp_end_date=='') {
+          alert("The Expiry Ending Date is required");
+        }
+        else if (original_price==null || original_price=='') {
+          alert("The Original Price is required");
+        }
+        else if (sale_price==null || sale_price=='') {
+          alert("The Sale Price is required");
+        }
+
+        else if (imei==null || imei=='') {
+          alert("The IMEI no is required");
+        }
+          else{
+            productIdArr.push(product_name);
       // let productNameArr = new Array();
-        expStartingArr.push(exp_start_date);
-        expEndingArr.push(exp_end_date);
-        originalPriceArr.push(original_price);
-        discountArr.push(discount);
-        purchasePriceArr.push(purchase_price);
-        salePriceArr.push(sale_price);
-        statusArr.push(status);
-        imeiArr.push(imei);
+            expStartingArr.push(exp_start_date);
+            expEndingArr.push(exp_end_date);
+            originalPriceArr.push(original_price);
+            discountArr.push(discount);
+            purchasePriceArr.push(purchase_price);
+            salePriceArr.push(sale_price);
+            statusArr.push(status);
+            imeiArr.push(imei);
           
       // Show the inserted data in the table
-           
+           $("#mydata").show();
+           document.getElementById("submit").disabled = false;
            let table = document.getElementById("myTableData");
           
           //count the table row
@@ -423,7 +555,7 @@ $id=$_GET["id"];
           
           //insert the coulmn against the row
           row.insertCell(0).innerHTML= rowCount;
-          row.insertCell(1).innerHTML= product_name;
+          row.insertCell(1).innerHTML= fetch_product_name;
           row.insertCell(2).innerHTML= exp_start_date;
           row.insertCell(3).innerHTML= exp_end_date;
           row.insertCell(4).innerHTML= original_price;
@@ -433,41 +565,12 @@ $id=$_GET["id"];
           row.insertCell(8).innerHTML= status;   
           row.insertCell(9).innerHTML= imei;
           $("#imei").val('');
+          }
       }
+
       
-      let product,expS, expE,originalP,discountP, pPrice, sPrice,imeiNo,productStatus;
-      function objVariables(){
-                  product     = productIdArr;
-            expS        = expStartingArr;
-            expE        = expEndingArr;
-            originalP   = originalPriceArr;
-            discountP   = discountArr;
-            pPrice      = purchasePriceArr;
-            sPrice      = salePriceArr;
-            productStatus = statusArr;
-            imeiNo      = imeiArr;  
-      }     
-        
-        $(document).ready(function(){
-          $('#submit').click(function(){
-                  $.ajax({
-              url:"products_ajax_request.php",
-              method: "POST",
-              data:{purchase_invoice_id:purchaseInvoiceId, product_id:product ,exp_starting:expS, exp_ending:expE, original_price:originalP,discount_per_item:discountP, purchase_price:pPrice,sale_price:sPrice,
-              status:productStatus,imei_no:imeiNo},
-                            
-              success:function(message)
-              {
-                //alert(message);
-                $(".x_content").html(message);
-              }
-              });             
-                }); // click event
-        });// ready 
-        
-        //variables declaration of accounts detail
-        let netTotalOfProducts=0, discountPerProducts=0,netTotalOfInvoice=0, discountValue, discountPerInvoice=0, discountReceivedOnInvoice=0,
-            amountPaid,amountPayable,valueOfAmountPayable, netDiscount,valueOfNetDiscount,valueOfNetTotal; 
+      
+      
         //function for whole discount per invoice including products discount
         function discountOnInvoice()
             {
@@ -521,19 +624,48 @@ $id=$_GET["id"];
         }
         //ajax code for insert accounts detail against invoice
         $(document).ready(function(){
-          $('#insert').click(function(){
-                  $.ajax({
-              url:"ajax_request_accounts.php",
-              method: "POST",
-              data:{purchase_invoice_id:purchaseInvoiceId, net_total_of_products:netTotalOfProducts, discount_per_products:discountPerProducts, discount_received_on_invoice:discountReceivedOnInvoice, net_discount:netDiscount, net_total_of_invoice:netTotalOfInvoice, amount_paid:amountPaid,amount_payable:amountPayable},
-              success:function(message)
-              {
-                //alert(message);
-                $("#accounts_detail").html(message);
-              }
-              });             
-                }); // click event 
+           // click event 
+          $("#product_name").change(function(){
+            var productId= $("#product_name").val();
+            $.ajax({
+        type:'post',
+        data:{productId:productId},
+        url: "fetch_product_name.php",
+
+        success: function(result){
+        data=$.parseJSON(result);
+        var fee = data["product_name"];
+        //alert(fee);
+
+          $('#fetch_product_name').val(fee);
+        
+        }         
+    });
+          });
+          $("#submit").click(function(){
+           $.ajax({
+            type:'post',
+            data:{
+              purchaseInvoiceId:purchaseInvoiceId,
+              productIdArr:productIdArr,
+              expStartingArr:expStartingArr,
+              expEndingArr:expEndingArr,
+              originalPriceArr:originalPriceArr,
+              discountArr:discountArr,
+              purchasePriceArr:purchasePriceArr,
+              salePriceArr:salePriceArr,
+              statusArr:statusArr,
+              imeiArr:imeiArr
+        },
+        url: "insert_invoice_data.php",
+        success: function(result){
+        window.location='product_per_purchase_invoice-'+purchaseInvoiceId;
+       } 
+    });
+          });
+
         });// ready 
+
 
 
 
