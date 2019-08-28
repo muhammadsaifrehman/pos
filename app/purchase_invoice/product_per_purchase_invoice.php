@@ -73,7 +73,7 @@ $id=$_GET["id"];
       <div class="row">
         <div class="col-md-12">
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'products_per_purchase_invoice')">Add Products Per Invoice</button>
+            <button class="tablinks" onclick="openTab(event, 'products_per_purchase_invoice')" >Add Products Per Invoice</button>
             <button class="tablinks" onclick="openTab(event, 'accounts_detail')">Accounts Detail</button>
           </div>
           <div id="products_per_purchase_invoice" class="tabcontent">
@@ -154,10 +154,8 @@ $id=$_GET["id"];
                   $sql_fetch=mysqli_query($con,"SELECT original_price,discount_per_item FROM products_per_purchase_invoice where purchase_invoice_id= $id");
                   while($row=mysqli_fetch_assoc($sql_fetch)) {
                     $original_price=$original_price+$row["original_price"];
-                    $discount=$discount+$row["discount_per_item"];
+                    $discount+=$row["discount_per_item"];
                   }
-                  // echo $original_price;
-                  //echo $discount;
                   ?>
                   
                     <div class="col-md-3"> 
@@ -165,86 +163,67 @@ $id=$_GET["id"];
   
                     </div>
                     <div class="col-md-6">
-                      <input type="text" class="form-control" name="" value="<?php echo $original_price; ?>" placeholder="" readonly="">
+                      <input type="text" class="form-control" name="net_total_of_products" value="<?php echo $original_price; ?>" placeholder="Total Amount of the products" readonly="" id="net_total_of_products">
                       </div>
                     </div> 
                     <div class="row mag">
                       <div class="col-md-3"> 
-                      <label>Discount Per Product</label>
+                      <label>Discount Per Product<span style="color: red;margin-left: 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="<?php echo $discount;?>" placeholder="" readonly>
+                          <input type="text" class="form-control" name="products_discount" id="products_discount" value="<?php echo $discount;?>" placeholder="" readonly required="required">
+                        </div>
+                    </div>
+                    <div class="row mag">
+                      <div class="col-md-3">
+                        <label> Discount on Invoice<span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
+                      </div>
+                      <div class="col-md-6">
+                        <input type="radio" id="percentage_of_invoice" checked="" name="invoice_discount"> Percentage
+                        <input type="radio" id="amount_of_invoice" name="invoice_discount"> Amount
+                        <input type="text" name="discount_of_invoice" id="discount_of_invoice" class="form-control"  value="0" required="required">
+                      </div>
+                    </div>
+                     
+                    <div class="row mag">
+                      <div class="col-md-3"> 
+                      <label>Net Discount<span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
+                      </div>
+                      <div class="col-md-6">
+                          <input type="text" class="form-control" name="net_discount_of_invoice"  placeholder="Net discount" readonly="" id="net_discount_of_invoice" required="required">
                         </div>
                     </div>
                     <div class="row mag">
                       <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
+                      <label>Net Total of the Invoice<span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
-                        </div>
-                    </div>  
-                    <div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
-                      </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
+                          <input type="text" class="form-control" id="net_total" placeholder="Net total of the invoice" readonly="" required="required" name="net_total">
                         </div>
                     </div>
                     <div class="row mag">
                       <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
+                      <label>Amount Paid <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
+                          <input type="text" class="form-control"  placeholder="Amount Paid" name="amount_paid" id="amount_paid" onfocus="discountOnInvoice();readOnlyNetDiscount();" required="required">
                         </div>
                     </div>
                     <div class="row mag">
                       <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
+                      <label>Amount Payable <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
+                          <input type="text" class="form-control" name="" value="" placeholder="Remaining Amount" readonly="" id="amount_payable" onfocus="readOnlyAmountPayable()"; required="required">
                         </div>
                     </div>
-                    <div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-4"> 
+                      
                       </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
-                        </div>
-                    </div><div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
-                      </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
-                        </div>
-                    </div>
-                    <div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
-                      </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
-                        </div>
-                    </div>
-                    <div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
-                      </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
-                        </div>
-                    </div>
-                    <div class="row mag">
-                      <div class="col-md-3"> 
-                      <label>Total Amount of the products</label>
-                      </div>
-                      <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="">
+                      <div class="col-md-4">
+                          <button type="button" class="btn btn-success btn-block" id="insert_invoice"> Insert </button>
                         </div>
                     </div>
 
@@ -576,30 +555,31 @@ $id=$_GET["id"];
             {
               netTotalOfProducts = parseInt(document.getElementById("net_total_of_products").value);
               discountPerProducts  = parseInt(document.getElementById("products_discount").value);
-              
+              //alert(netTotalOfProducts);
                   
                 if(document.getElementById('percentage_of_invoice').checked)
                   {
+
                     //discountValue get from text box that we received on invoice
                     discountValue = parseInt(document.getElementById("discount_of_invoice").value);
                     
                     discountReceivedOnInvoice = parseInt((netTotalOfProducts*discountValue)/100);
                     
-                    netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice;
+                    netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice-discountPerProducts;
                   }
                 
                 else if(document.getElementById('amount_of_invoice').checked)
                   {
+                    // alert("text");
                     discountValue = parseInt(document.getElementById("discount_of_invoice").value);
   
                     discountReceivedOnInvoice  = discountValue;
                     
-                    netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice;
+                    netTotalOfInvoice = netTotalOfProducts-discountReceivedOnInvoice-discountPerProducts;
+                    
                   } 
                 
-                else{
-                      netTotalOfInvoice = netTotalOfProducts;
-                }   
+                 
             }
         
         function readOnlyNetDiscount()
@@ -618,7 +598,7 @@ $id=$_GET["id"];
           
             amountPaid = parseInt(document.getElementById('amount_paid').value);
             amountPayable = netTotalOfInvoice-amountPaid;
-              
+             
             valueOfAmountPayable = document.getElementById('amount_payable');
                 valueOfAmountPayable.value=amountPayable;
         }
@@ -662,11 +642,24 @@ $id=$_GET["id"];
         window.location='product_per_purchase_invoice-'+purchaseInvoiceId;
        } 
     });
-          });
-
-        });// ready 
 
 
+});// ready 
+$(document).ready(function(){
+ $("#insert_invoice").click(function(){
+      var total_amount=$("#net_total_of_products").val();
+      var discount_amount=$("#net_discount_of_invoice").val();
+      var net_total=$("#net_total").val();
+      var paid_amount=$("#amount_paid").val();
+      var payable_amount=$("#amount_payable").val();
+      // alert(total_amount);
+      // alert(discount_amount);
+      // alert(net_total);
+      alert(purchaseInvoiceId);
+      alert(paid_amount);
+      alert(payable_amount);
 
-
+    })
+  });
+  })
 </script>
