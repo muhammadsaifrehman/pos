@@ -64,6 +64,7 @@ $id=$_GET["id"];
       <h1>Item Against the invoice</h1>
       <ol class="breadcrumb">
         <li><a href="../index/admin_view"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href=""><i class="fa fa-dashboard"></i>email me</a></li>
         <li class="active">Purchase Invoice</li>
       </ol>
     </section>
@@ -74,7 +75,7 @@ $id=$_GET["id"];
         <div class="col-md-12">
           <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'products_per_purchase_invoice')" >Add Products Per Invoice</button>
-            <button class="tablinks" onclick="openTab(event, 'accounts_detail')">Accounts Detail</button>
+            <button class="tablinks" onclick="openTab(event, 'accounts_detail');abc()">Accounts Detail</button>
           </div>
           <div id="products_per_purchase_invoice" class="tabcontent">
           
@@ -146,24 +147,16 @@ $id=$_GET["id"];
             </div>
             
             <div class="box-body">
-              <form  method="post">
-                <div class="row mag">
-                  <?php 
-                  $discount=0;
-                  $original_price=0;
-                  $sql_fetch=mysqli_query($con,"SELECT original_price,discount_per_item FROM products_per_purchase_invoice where purchase_invoice_id= $id");
-                  while($row=mysqli_fetch_assoc($sql_fetch)) {
-                    $original_price=$original_price+$row["original_price"];
-                    $discount+=$row["discount_per_item"];
-                  }
-                  ?>
-                  
+              <form  method="post" action="manage_accounts.php">
+                <input type="hidden" name="purchaseInvoiceId" value="<?php echo $id; ?>">
+                <div class="row mag">              
                     <div class="col-md-3"> 
                       <label>Total Amount of the products<span style="color: red;margin-left: 5px;font-size: 18px"><b>*</b></span></label>
   
                     </div>
+
                     <div class="col-md-6">
-                      <input type="text" class="form-control" name="net_total_of_products" value="<?php echo $original_price; ?>" placeholder="Total Amount of the products" readonly="" id="net_total_of_products">
+                      <input type="text" class="form-control" name="net_total_of_products"  placeholder="Total Amount of the products" readonly="" id="net_total_of_products">
                       </div>
                     </div> 
                     <div class="row mag">
@@ -171,7 +164,7 @@ $id=$_GET["id"];
                       <label>Discount Per Product<span style="color: red;margin-left: 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="products_discount" id="products_discount" value="<?php echo $discount;?>" placeholder="" readonly required="required">
+                          <input type="text" class="form-control" name="products_discount" id="products_discount"  placeholder="" readonly required="required">
                         </div>
                     </div>
                     <div class="row mag">
@@ -214,7 +207,7 @@ $id=$_GET["id"];
                       <label>Amount Payable <span style="color: red;margin: 15px 0px 0px 5px;font-size: 18px"><b>*</b></span></label>
                       </div>
                       <div class="col-md-6">
-                          <input type="text" class="form-control" name="" value="" placeholder="Remaining Amount" readonly="" id="amount_payable" onfocus="readOnlyAmountPayable()"; required="required">
+                          <input type="text" class="form-control" name="amount_payable" value="" placeholder="Remaining Amount" readonly="" id="amount_payable" onfocus="readOnlyAmountPayable()"; required="required" >
                         </div>
                     </div>
                     <br>
@@ -223,7 +216,7 @@ $id=$_GET["id"];
                       
                       </div>
                       <div class="col-md-4">
-                          <button type="button" class="btn btn-success btn-block" id="insert_invoice"> Insert </button>
+                          <button type="submit" class="btn btn-success btn-block" name="insert_account"> Insert </button>
                         </div>
                     </div>
 
@@ -482,8 +475,9 @@ $id=$_GET["id"];
         var exp_start_date = $('#expiry_start_date').val();
         var exp_end_date = $('#expiry_end_date').val();
         var original_price = $('#original_price').val();
-        var discount = $('#discount').val();
         var purchase_price = $('#purchase_price').val();
+        var discount = original_price-purchase_price;
+        
         var sale_price = $('#sale_price').val();
         var status = $('#status').val();
         var imei = $('#imei').val();
@@ -594,6 +588,31 @@ $id=$_GET["id"];
           valueOfNetTotal.value=netTotalOfInvoice;
             
         }
+        // Function to fetch the amount of the inserted entries
+        function abc(){
+          $.ajax({
+            type:'post',
+            data:{
+              purchaseInvoiceId:purchaseInvoiceId,
+               },
+        url: "fetch_amount.php",
+        success: function(result){
+
+            var lengh = JSON.parse(result);
+            var length_array=lengh.length;
+
+            var original_price=lengh[0];
+            var discount=lengh[1];
+            //alert(original_price);
+            //alert(discount);
+            $("#net_total_of_products").val(original_price);
+            $("#products_discount").val(discount);
+            //$("#std").append(option); 
+          // $('#fetch_product_name').val(fee);
+        
+       } 
+      })
+        } 
         function readOnlyAmountPayable(){
           
             amountPaid = parseInt(document.getElementById('amount_paid').value);
@@ -640,26 +659,12 @@ $id=$_GET["id"];
         url: "insert_invoice_data.php",
         success: function(result){
         window.location='product_per_purchase_invoice-'+purchaseInvoiceId;
+        
        } 
     });
 
 
 });// ready 
-$(document).ready(function(){
- $("#insert_invoice").click(function(){
-      var total_amount=$("#net_total_of_products").val();
-      var discount_amount=$("#net_discount_of_invoice").val();
-      var net_total=$("#net_total").val();
-      var paid_amount=$("#amount_paid").val();
-      var payable_amount=$("#amount_payable").val();
-      // alert(total_amount);
-      // alert(discount_amount);
-      // alert(net_total);
-      alert(purchaseInvoiceId);
-      alert(paid_amount);
-      alert(payable_amount);
 
-    })
-  });
   })
 </script>
