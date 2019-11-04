@@ -39,7 +39,7 @@
 
 ?>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery-1.12.4.min.js"></script>
         <script>
         //When the page has loaded.
         $( document ).ready(function(){

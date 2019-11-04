@@ -208,25 +208,25 @@
           </li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-user"></i> <span>Products</span>
+              <i class="fa fa-user"></i> <span>Sale</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="../products/product_record"><i class="fa fa-users"></i> Product</a></li>
+              <li><a href="../sale_invoice/create_sale_invoice"><i class="fa fa-users"></i> Sale Invoice</a></li>
               
             </ul>
           </li>
           <li class="treeview">
             <a href="#">
-              <i class="fa fa-user"></i> <span>Products</span>
+              <i class="fa fa-user"></i> <span>Stock</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="../products/product_record"><i class="fa fa-users"></i> Product</a></li>
+              <li><a href="../stock/stock"><i class="fa fa-users"></i>Stock</a></li>
               
             </ul>
           </li>

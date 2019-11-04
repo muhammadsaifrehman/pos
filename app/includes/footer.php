@@ -7,10 +7,7 @@
   </footer>
 <!-- jQuery UI 1.11.4 -->
 
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
+
 <!-- Bootstrap 3.3.7 -->
 <!-- <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script> -->
 <!-- Morris.js charts -->
@@ -34,8 +31,8 @@
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
@@ -48,18 +45,7 @@
 
 
 <!-- page script -->
-<script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : true
-    })
-  })
+
 </script>
 <script src="../../bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="../../bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
