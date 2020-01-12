@@ -22,7 +22,12 @@
 	}
 	function welcome_message(){
 		if ($_SESSION["welcome"]) {
-			$_SESSION["welcome"]='<div class="alert alert-success" style="margin-top:30px;" id="message"><i class="fa fa-check"></i> '.$_SESSION["welcome"].'</div>';
+			$_SESSION["welcome"]='<div class="row">
+									<div class="col-md-3"></div>
+									<div class="col-md-6">
+									<div class="alert alert-success" style="margin-top:30px;text-align:center;" id="message"><i class="fa fa-check"></i> '.$_SESSION["welcome"].'</div>
+									</div>
+								</div>';
 			echo $_SESSION["welcome"];
 		}
 		$_SESSION["welcome"]="";
@@ -30,7 +35,7 @@
 	}
 	function session_message(){
 		if ($_SESSION["message"]) {
-			$_SESSION["message"]='<div class="row" id="message"><div class="col-md-3"></div><div class="col-md-6"><div class="alert alert-success" style="top:30px;text-align:center;" ><i class="fa fa-check"></i> '.$_SESSION["message"].'</div></div>';
+			$_SESSION["message"]='<div class="row" id="message"><div class="col-md-3"></div><div class="col-md-6"><div class="alert alert-success" style="top:30px;text-align:center;" ><i class="fa fa-check"></i> '.$_SESSION["message"].'</div></div></div>';
 			echo $_SESSION["message"];
 		}
 		$_SESSION["message"]="";

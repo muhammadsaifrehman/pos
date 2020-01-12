@@ -28,6 +28,9 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+              <div class="table-responsive">
+                
+              
               <table id="example1" class="table table-bordered table-striped table-responsive">
                 <thead>
                 <tr>
@@ -47,14 +50,14 @@
                 while ($row = mysqli_fetch_array($result)) { ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><b><a href="sale_invocie-<?php echo $row['id']; ?>"><?php  echo $row['name'] ;?></a></b></td>
+                    <td><b><a href="sale_invoice-<?php echo $row['id']; ?>"><?php  echo $row['name'] ;?></a></b></td>
                     <td><?php  echo $row['father_name'] ;?></td>
                     <td><?php  echo $row['address'] ;?></td>
                     <td> <?php  echo $row['cnic'] ;?></td>
                      <td>
                     <a href="view-<?php echo $row['id']; ?>" title="View"><i class="fa fa-eye" style="color:orange;font-size: 15px;margin:5px;"></i></a>
                     <a href="edit-<?php echo $row['id']; ?>" title="Edit"><i class="fa fa-pencil" style="color:skyblue;font-size: 15px;margin:5px;"></i></a>
-                    <a href="delete-<?php echo $row['id']; ?>" title="Delete" onclick="return confirm('Are you sure ??')"><i class="fa fa-trash" style="color:red;font-size: 15px;margin:5px;"></i></a>
+                    <!-- <a href="delete-<?php echo $row['id']; ?>" title="Delete" onclick="return confirm('Are you sure ??')"><i class="fa fa-trash" style="color:red;font-size: 15px;margin:5px;"></i></a> -->
                   </td>
                   </tr>
                   <?php
@@ -64,6 +67,7 @@
                 </tbody>
                
               </table>
+            </div>
             </div>
             <!-- /.box-body -->
           </div>

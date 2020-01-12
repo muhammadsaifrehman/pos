@@ -47,7 +47,7 @@
                 while ($row = mysqli_fetch_array($result)) { ?>
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php  echo $row['name'] ;?></td>
+                    <td><b><a href="purchase_invoice_view-<?php  echo $row['id'] ;?>"><?php  echo $row['name'] ;?></a></b></td>
                     <td><?php  echo $row['father_name'] ;?></td>
                     <td><?php  echo $row['address'] ;?></td>
                     <td> <?php  echo $row['cnic'] ;?></td>

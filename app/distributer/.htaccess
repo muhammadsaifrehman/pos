@@ -8,3 +8,15 @@ RewriteRule ^view-([0-9]+) view.php?id=$1
 RewriteRule ^edit-([0-9]+) edit.php?id=$1
 
 RewriteRule ^delete-([0-9]+) delete.php?id=$1
+
+RewriteRule ^collect_purchase_invoice-([0-9]+) collect_purchase_invoice.php?id=$1
+
+RewriteRule ^update_purchase_invoice-([0-9]+) update_purchase_invoice.php?id=$1
+
+RewriteRule ^purchase_invoice_details-([0-9]+) purchase_invoice_details.php?id=$1
+
+RewriteRule ^transection_details-([0-9]+) transection_detail.php?id=$1
+
+RewriteRule ^product_per_purchase_invoice-([0-9]+) product_per_purchase_invoice.php?id=$1
+
+RewriteRule ^purchase_invoice_view-([0-9]+) purchase_invoice_view.php?id=$1

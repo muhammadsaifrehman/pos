@@ -2,3 +2,5 @@ RewriteEngine On
 
 RewriteRule ^stock?$ index.php
 
+RewriteRule ^purchase_report?$ report.php
+

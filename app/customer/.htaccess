@@ -8,5 +8,12 @@ RewriteRule ^view-([0-9]+) view.php?id=$1
 RewriteRule ^edit-([0-9]+) edit.php?id=$1
 
 RewriteRule ^delete-([0-9]+) delete.php?id=$1
+RewriteRule ^sale_invoice_details-([0-9]+) sale_invoice_details.php?id=$1
 
-RewriteRule ^sale_invocie-([0-9]+) sale_invoic_view.php?id=$1
+RewriteRule ^sale_invoice-([0-9]+) sale_invoic_view.php?id=$1
+
+RewriteRule ^collect_sale_invoice-([0-9]+) collect_sale_invoice.php?id=$1
+
+RewriteRule ^transecrtion_details-([0-9]+) transection_details.php?id=$1
+
+RewriteRule ^update_sale_invoice-([0-9]+) update_sale_invoice.php?id=$1

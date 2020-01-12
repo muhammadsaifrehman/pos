@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DateRange picker</title>
+	<link rel="stylesheet" type="text/css" href="jquery/jquery-ui.css">
+  	<script src="jquery/jquery-1.12.4.js"></script>
+  	<script src="jquery/jquery-ui.js"></script>
+  	<script>
+  		$(document).ready(function(){
+  			$('#mindate,#maxdate').datepicker({
+
+		 		dateFormat: "yy-mm-dd"
+		 	});
+  			$('#actualdate').datepicker({
+			  dateFormat: "yy-mm-dd",
+			  maxDate:0,
+			  minDate: 0
+			 });
+  			$('#mindate,#maxdate').change(function(){
+  				var minimum=$('#mindate').val();
+  				var maximum=$('#maxdate').val();
+  				// alert(minimum);
+  				// alert(maximum);
+  				
+  				$('#actualdate').datepicker('destroy');
+  				if ((minimum!='') && (maximum!='')) {
+  					$('#actualdate').datepicker({
+  					dateFormat: "yy-mm-dd",
+			  		maxDate:maximum,
+			  		minDate: minimum
+  				});
+  				}
+  				
+  			});
+
+
+  		});
+  	</script>
+  	<style type="text/css" media="screen">
+  		input{
+  			margin-left: 30px;
+  			padding: 5px;
+  			border-radius: 5px;
+  		}
+  	</style>
+</head>
+<body>
+	<input type="text" name="" id="mindate" placeholder="Enter min date">
+	<input type="text" name="" id="maxdate" placeholder="Enter Max date"><br>
+	<input type="text" name="" id="actualdate" style="margin-top: 200px">
+</body>
+</html>
